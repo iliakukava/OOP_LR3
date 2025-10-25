@@ -8,20 +8,15 @@ class Figure {
 public:
     // деструктор
     virtual ~Figure() = default;
-    // Вычисление геометрического центра фигуры
     virtual Point getCenter() const = 0;
-    // Вычисление площади фигуры
     virtual double getArea() const = 0;    
-    // Оператор приведения к double (возвращает площадь)
+    // Приведения к double возвращает площадь
     virtual operator double() const = 0;
-    // Вывод информации о фигуре
     virtual void print(std::ostream& os) const = 0;
-    // Чтение данных фигуры 
     virtual void read(std::istream& is) = 0;
     
     
-    
-    // Клонирование фигуры (для копирования через указатель)    
+    // Создание копии фигуры (нужно для работы с указателями)
     virtual Figure* clone() const = 0;
 };
 

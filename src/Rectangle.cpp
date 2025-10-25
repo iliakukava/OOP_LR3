@@ -2,7 +2,7 @@
 #include <cmath>
 #include <stdexcept>
 
-// Конструктор по умолчанию (прямоугольник 2x1)
+// по умолчанию прямоугольник 2x1
 Rectangle::Rectangle() : vertices{
     Point(0, 0), Point(2, 0), Point(2, 1), Point(0, 1)
 } {}
@@ -20,7 +20,7 @@ Rectangle::Rectangle(const Rectangle& other)
 Rectangle::Rectangle(Rectangle&& other) noexcept
     : vertices(std::move(other.vertices)) {}
 
-// Оператор присваивания (копирование)
+// Оператор присваивания копирование
 Rectangle& Rectangle::operator=(const Rectangle& other) {
     if (this != &other) {
         vertices = other.vertices;
@@ -28,7 +28,7 @@ Rectangle& Rectangle::operator=(const Rectangle& other) {
     return *this;
 }
 
-// Оператор присваивания (перемещение)
+// Оператор присваивания перемещение
 Rectangle& Rectangle::operator=(Rectangle&& other) noexcept {
     if (this != &other) {
         vertices = std::move(other.vertices);
@@ -36,7 +36,6 @@ Rectangle& Rectangle::operator=(Rectangle&& other) noexcept {
     return *this;
 }
 
-// Оператор сравнения
 bool Rectangle::operator==(const Rectangle& other) const {
     for (size_t i = 0; i < 4; ++i) {
         if (vertices[i] != other.vertices[i]) {
@@ -56,7 +55,6 @@ Point Rectangle::getCenter() const {
 }
 
 double Rectangle::getArea() const {
-    // Тем же методом, что и у квадрата
     double area = 0;
     for (size_t i = 0; i < 4; ++i) {
         size_t j = (i + 1) % 4;
@@ -92,7 +90,6 @@ Figure* Rectangle::clone() const {
     return new Rectangle(*this);
 }
 
-// Получить вершину по индексу
 const Point& Rectangle::getVertex(size_t index) const {
     if (index >= 4) {
         throw std::out_of_range("Rectangle vertex index out of range");
@@ -100,7 +97,6 @@ const Point& Rectangle::getVertex(size_t index) const {
     return vertices[index];
 }
 
-// Установить вершину по индексу
 void Rectangle::setVertex(size_t index, const Point& p) {
     if (index >= 4) {
         throw std::out_of_range("Rectangle vertex index out of range");

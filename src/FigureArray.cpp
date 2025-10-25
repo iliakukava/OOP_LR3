@@ -2,7 +2,6 @@
 #include <iostream>
 #include <stdexcept>
 
-// Конструктор
 FigureArray::FigureArray(size_t initialCapacity) 
     : capacity(initialCapacity), size(0) {
     data = new Figure*[capacity];
@@ -16,7 +15,6 @@ FigureArray::~FigureArray() {
     delete[] data;
 }
 
-// Увеличить вместимость массива
 void FigureArray::resize() {
     size_t newCapacity = capacity * 2;
     Figure** newData = new Figure*[newCapacity];
@@ -39,8 +37,7 @@ void FigureArray::add(Figure* figure) {
         resize();
     }
     
-    data[size] = figure;
-    ++size;
+    data[size++] = figure;
 }
 
 void FigureArray::remove(size_t index) {
@@ -52,8 +49,7 @@ void FigureArray::remove(size_t index) {
     for (size_t i = index; i < size - 1; ++i) {
         data[i] = data[i + 1];
     }
-    data[size - 1] = nullptr;
-    --size;
+    data[--size] = nullptr;
 }
 
 Figure* FigureArray::get(size_t index) const {
@@ -66,7 +62,6 @@ Figure* FigureArray::get(size_t index) const {
 double FigureArray::getTotalArea() const {
     double total = 0;
     for (size_t i = 0; i < size; ++i) {
-        // Используем оператор приведения к double
         total += static_cast<double>(*data[i]);
     }
     return total;
@@ -78,15 +73,15 @@ void FigureArray::printAll() const {
         return;
     }
     
-    std::cout << "\n=== Все фигуры в массиве ===" << std::endl;
+    std::cout << "\n Все фигуры в массиве" << std::endl;
     for (size_t i = 0; i < size; ++i) {
         std::cout << i << ". ";
         std::cout << *data[i];
         Point center = data[i]->getCenter();
         double area = data[i]->getArea();
         
-        std::cout << " | Центр: " << center 
-                  << " | Площадь: " << area << std::endl;
+        std::cout << "Центр: " << center 
+                  << "Площадь: " << area << std::endl;
     }
     std::cout << "\nОбщая площадь всех фигур: " << getTotalArea() << std::endl;
 }

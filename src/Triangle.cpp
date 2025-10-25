@@ -5,11 +5,10 @@
 Triangle::Triangle() : vertices{Point(0, 0), Point(1, 0), Point(0.5, 0.866)} {
     // равносторонний треугольник со стороной 1
 }
-// Конструктор с тремя точками
+
 Triangle::Triangle(const Point& p1, const Point& p2, const Point& p3) 
     : vertices{p1, p2, p3} {}
 
-// Конструктор с массивом точек
 Triangle::Triangle(const std::array<Point, 3>& points) 
     : vertices(points) {}
 
@@ -36,7 +35,6 @@ Triangle& Triangle::operator=(Triangle&& other) noexcept {
     return *this;
 }
 
-// Оператор сравнения
 bool Triangle::operator==(const Triangle& other) const {
     for (size_t i = 0; i < 3; ++i) {
         if (vertices[i] != other.vertices[i]) {
@@ -46,7 +44,7 @@ bool Triangle::operator==(const Triangle& other) const {
     return true;
 }
 
-// Вычисление геометрического центра (центроид)
+
 Point Triangle::getCenter() const {
     double cx = (vertices[0].x + vertices[1].x + vertices[2].x) / 3.0;
     double cy = (vertices[0].y + vertices[1].y + vertices[2].y) / 3.0;
@@ -69,12 +67,10 @@ double Triangle::getArea() const {
     return area;
 }
 
-// Оператор приведения к double
 Triangle::operator double() const {
     return getArea();
 }
 
-// Вывод информации о треугольнике
 void Triangle::print(std::ostream& os) const {
     os << "Triangle: ";
     for (size_t i = 0; i < 3; ++i) {
@@ -83,7 +79,6 @@ void Triangle::print(std::ostream& os) const {
     }
 }
 
-// Чтение треугольника из потока
 void Triangle::read(std::istream& is) {
     std::cout << "Введите координаты 3 вершин треугольника (x y для каждой):\n";
     for (size_t i = 0; i < 3; ++i) {
@@ -92,12 +87,10 @@ void Triangle::read(std::istream& is) {
     }
 }
 
-// Клонирование (создание копии через указатель)
 Figure* Triangle::clone() const {
     return new Triangle(*this);
 }
 
-// Получить вершину по индексу
 const Point& Triangle::getVertex(size_t index) const {
     if (index >= 3) {
         throw std::out_of_range("Triangle vertex index out of range");
@@ -105,7 +98,6 @@ const Point& Triangle::getVertex(size_t index) const {
     return vertices[index];
 }
 
-// Установить вершину по индексу
 void Triangle::setVertex(size_t index, const Point& p) {
     if (index >= 3) {
         throw std::out_of_range("Triangle vertex index out of range");

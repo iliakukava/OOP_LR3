@@ -2,7 +2,7 @@
 #include <cmath>
 #include <stdexcept>
 
-// Конструктор по умолчанию (квадрат 1x1 в начале координат)
+//по умолчанию квадрат 1x1 в начале координат
 Square::Square() : vertices{
     Point(0, 0), Point(1, 0), Point(1, 1), Point(0, 1)
 } {}
@@ -60,9 +60,9 @@ double Square::getArea() const {
     // S = 0.5 × |Σ(xi × yi+1 - xi+1 × yi)|
     double area = 0;
     for (size_t i = 0; i < 4; ++i) {
-        size_t j = (i + 1) % 4;
-        area += vertices[i].x * vertices[j].y;
-        area -= vertices[j].x * vertices[i].y;
+        size_t next = (i + 1) % 4;
+        area += vertices[i].x * vertices[next].y;
+        area -= vertices[next].x * vertices[i].y;
     }
     return std::abs(area) / 2.0;
 }
@@ -89,7 +89,6 @@ Figure* Square::clone() const {
     return new Square(*this);
 }
 
-// Получить вершину по индексу
 const Point& Square::getVertex(size_t index) const {
     if (index >= 4) {
         throw std::out_of_range("Square vertex index out of range");
@@ -97,7 +96,6 @@ const Point& Square::getVertex(size_t index) const {
     return vertices[index];
 }
 
-// Установить вершину по индексу
 void Square::setVertex(size_t index, const Point& p) {
     if (index >= 4) {
         throw std::out_of_range("Square vertex index out of range");
